@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: test-s3
+spec:
+  template:
+    metadata:
+      labels:
+        app: test-s3
+    spec:
+      serviceAccountName: manp1
+      containers:
+      - name: test
+        image: amazon/aws-cli:latest
+        args: ["s3", "ls", "s3://msbuckett"]
+      restartPolicy: Never
